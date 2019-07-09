@@ -14,10 +14,13 @@ class Game
 
   def run
     if not game_over?
-      puts "#{}"
+
       puts "#{@players[0].name}: What does #{@rand1} plus #{@rand2} equal?"
       answer = gets.chomp
 
+      if answer.to_i == (@rand1 + @rand2)
+        puts 'Success'
+      end
 
       # turn = @turn_manager.next_turn
 
