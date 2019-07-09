@@ -1,11 +1,12 @@
 class Player
-  attr_reader :name
-
-  LIVES = 3
+  attr_accessor :name, :lives
 
   def initialize name
     @name = name
-    @lives = LIVES
+    @lives = 3
   end
 
+  def lose_life
+    @lives -= 1
+  end
 end
