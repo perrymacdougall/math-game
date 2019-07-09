@@ -1,4 +1,5 @@
 require './player'
+require './question'
 
 class Game
   def initialize
@@ -13,12 +14,15 @@ class Game
   end
 
   def run
-    if not game_over?
+    while (not game_over?)
+      q1 = Question.new('Riley')
+      q1.test
+
 
       puts "#{@players[0].name}: What does #{@rand1} plus #{@rand2} equal?"
       answer = gets.chomp
 
-      if answer.to_i == (@rand1 + @rand2)
+      if answer.to_i == @rand1 + @rand2
         puts 'Success'
       end
 
