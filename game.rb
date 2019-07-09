@@ -1,4 +1,4 @@
-require '.player'
+require './player'
 
 class Game
   def initialize
@@ -8,4 +8,9 @@ class Game
     @players = [player1, player2]
     @turn_manager = TurnManager.new
   end
+
+  def run
+    while (not game_over?)
+  end
+
 end
