@@ -3,44 +3,40 @@ require './question'
 
 class Game
   def initialize
-    player1 = Player.new 'Player 1'
-    player2 = Player.new 'Player 2'
-
-    @players = [player1, player2]
-    @rand1 = rand(1..20)
-    @rand2 = rand(1..20)
-    # @turn_manager = TurnManager.new
-
+    @player1 = Player.new("#{ARGV[0]}")
+    @player2 = Player.new("#{ARGV[1]}")
+    @players = [@player1, @player2]
+    # @turn = Turn.new()
+    puts "#{@player1.name} vs #{@player2.name}"
   end
 
   def run
-    while (not game_over?)
-      q1 = Question.new('Riley')
-      q1.test
+    current_player = @players[0]
 
+    question = Question.new(current_player.name)
+    answer = question.ask
 
-      puts "#{@players[0].name}: What does #{@rand1} plus #{@rand2} equal?"
-      answer = gets.chomp
+    if answer.to_i == question.rand1 + question.rand2
+      puts "#{@player1.name}: #{@player1.lives}/3 vs #{@player2.name}: #{@player2.lives}/3"
+    else
+      current_player.lives -= 1
+      puts "#{@player1.name}: #{@player1.lives}/3 vs #{@player2.name}: #{@player2.lives}/3"
+    end
 
-      if answer.to_i == @rand1 + @rand2
-        puts 'Success'
-      end
+    @players = @players.rotate
 
-      # turn = @turn_manager.next_turn
-
-      # header "----- NEW TURN -----"
-
-      summary
+    if @player1.lives > 0 && @player2.lives > 0
+      puts "----- NEW TURN -----"
+      run
+    else
+      puts "----- GAME OVER -----"
+      return
     end
   end
-
-  private
-
-  def summary
-    @players.each { |p| puts p }
-  end
-
-  def game_over?
-    @players[0].lives < 1 || @players[1].lives < 1
-  end
 end
+
+game = Game.new
+
+puts "----- Game ON! -----"
+
+game.run
