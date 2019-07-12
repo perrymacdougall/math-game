@@ -4,7 +4,7 @@ This was an exercise to gain familiarity with the Ruby programming language and 
 
 ## Getting Started
 
-No dependencies! Just clone or download this repo and follow these steps:
+You will need a Ruby REPL to play this game (irb works just fine). Clone or download this repo and follow these steps:
 
 1. Open your Terminal and navigate to your `math-game` folder
 2. Name your players by passing two command line arguments into your Terminal
